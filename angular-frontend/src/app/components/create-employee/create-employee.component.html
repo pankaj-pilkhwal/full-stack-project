@@ -1,0 +1,23 @@
+<div col-md-8 offset-md-3>
+<h3>Add new Employee</h3>
+<form >
+    <div class="form-group">
+        <label>First Name</label>
+        <input type="text" class="form-control" id="firstName" [(ngModel)]= "employee.firstName" name="firstName" >
+
+        <label>Last Name</label>
+        <input type="text" class="form-control" id="lastName" [(ngModel)]="employee.lastName" name="lastName">
+
+        <label>Email Id</label>
+        <input type="text" class="form-control" id="emailId" [(ngModel)] = "employee.emailId" name="emailId">
+
+        <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+        <button class="btn btn-primary" (click)="resetAll()">Reset All </button>
+        
+
+    </div>
+</form>
+
+
+
+</div>
