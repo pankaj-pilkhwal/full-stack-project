@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../../employee';
 import { EmployeeService } from '../../service/employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-list',
@@ -8,27 +9,32 @@ import { EmployeeService } from '../../service/employee.service';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
-  employees: Employee[] = [
-    {
-      id:10,
-      firstName: "Pankaj",
-      lastName: "Pilkhwal",
-      emailId: "pankaj@gmail.com"
-    },
+  employees: Employee[] = []
 
-  ];
+  constructor(private employeeService: EmployeeService, private router: Router) { }
 
-
-  constructor(private employeeService: EmployeeService ) { }
-
-
-
-  ngOnInit(): void {
+  getEmployeesList(){
     this.employeeService.getEmployeesList().subscribe(data=> {
       this.employees = data;
-
-      console.log(this.employees)
     }); 
   }
 
+  updateEmployee(id: number) {
+    this.router.navigate(["update-employee",id])
+  }
+
+  deleteEmployee(id: number) {
+    this.employeeService.deleteEmployee(id).subscribe(data => {
+       console.log (data);
+       this.getEmployeesList()
+    });
+  }
+
+  employeeDetails(id: number) {
+    this.router.navigate(["employee-details",id])
+  }
+
+  ngOnInit(): void {
+    this.getEmployeesList();
+  }
 }
